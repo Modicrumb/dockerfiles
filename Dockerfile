@@ -16,8 +16,10 @@ RUN apt-get -y update && apt-get install -y \
   zlib1g-dev \
   && docker-php-ext-install -j$(nproc) intl pdo_mysql zip
 RUN a2enmod rewrite
-RUN composer.sh
-
+ADD composer.sh /
+RUN chmod +x /composer.sh
+RUN /composer.sh
+RUN rm /composer.sh
       
 
 
