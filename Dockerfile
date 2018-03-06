@@ -14,11 +14,11 @@ RUN apt-get -y update && apt-get install -y \
     imagemagick \
     unzip \
     zlib1g-dev \
-    wkhtmltopdf \
     libfreetype6-dev \
     libjpeg62-turbo-dev \
     libmcrypt-dev \
     libpng-dev \
+    libssl1.0-dev \
     && docker-php-ext-install -j$(nproc) intl pdo_mysql zip \
     && docker-php-ext-configure gd \
             --with-freetype-dir=/usr/include/ \
@@ -29,6 +29,8 @@ ADD composer.sh /
 RUN chmod +x /composer.sh
 RUN /composer.sh
 RUN rm /composer.sh
+COPY wkhtmltopdf /usr/bin
+RUN chmod +x /usr/bin/wkhtmltopdf
       
 
 
